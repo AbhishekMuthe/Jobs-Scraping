@@ -11,7 +11,7 @@ class Spider(scrapy.Spider):
     start_urls = ['https://www.naukri.com/']
     def parse(self, response):
         url = "https://www.naukri.com/information-technology-jobs"
-        yield scrapy.Request(url=url, callback=self.parse2)
+        yield scrapy.Request(url, callback=self.parse2)
 
     def parse2(self, response):
         count = 0
@@ -61,8 +61,8 @@ crawlprocess = CrawlerProcess({
     'USER_AGENT': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.131 Safari/537.36',
     'FEED_FORMAT': 'csv',
     'FEED_URI': 'output.csv',
-    'DEPTH_LIMIT': 2147483647,
-    'CLOSESPIDER_PAGECOUNT': 2147483647,
+    'DEPTH_LIMIT': 1000000,
+    'CLOSESPIDER_PAGECOUNT': 10000000,
 })
 crawlprocess.crawl(Spider, urls_file='input.txt')
 crawlprocess.start()
